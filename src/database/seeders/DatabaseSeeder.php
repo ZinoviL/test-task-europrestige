@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use Database\Factories\UserFactory;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -13,6 +14,17 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
+        UserFactory::new()
+            ->password('admin')
+            ->create(['email' => 'admin@admin.admin']);
+
+        $this->call([
+            ParameterSeeder::class,
+            CategorySeeder::class,
+            ProductSeeder::class,
+            CategoryProductSeeder::class,
+            CategoryParameterSeeder::class,
+            ParameterValueSeeder::class,
+        ]);
     }
 }
